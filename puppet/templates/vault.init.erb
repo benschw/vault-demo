@@ -58,17 +58,6 @@ do_start()
         $DAEMON_ARGS \
         || return 2
 
-    for i in `seq 1 30`; do
-        if ! start-stop-daemon --quiet --stop --test --pidfile $PIDFILE --exec $DAEMON --user $USER; then
-            RETVAL=2
-            sleep 1
-            continue
-        fi
-        if "$DAEMON" info >/dev/null; then
-            return 0
-        fi
-    done
-    return "$RETVAL"
 }
 
 

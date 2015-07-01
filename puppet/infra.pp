@@ -1,35 +1,35 @@
-Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
+Exec { path => '/usr/bin:/usr/sbin:/bin:/sbin' }
 
 
 stage { 'preinstall':
   before => Stage['main']
 }
- 
+
 class apt_get_update {
   exec { 'apt-get -y update': }
 }
- 
+
 class { 'apt_get_update':
   stage => preinstall
 }
 
-import "classes/*"
+import 'classes/*'
 
 node default {
 
-	class { 'consul':
-		config_hash => {
-			'datacenter'       => 'dc1',
-			'data_dir'         => '/opt/consul',
-			'ui_dir'           => '/opt/consul/ui',
-			'client_addr'      => '0.0.0.0',
-			'log_level'        => 'INFO',
-			'node_name'        => $::hostname,
-			'bind_addr'        => $::ipaddress_eth1,
-			'bootstrap_expect' => 1,
-			'server'           => true,
-		}
-	}
+  class { 'consul':
+    config_hash => {
+      'datacenter'       => 'dc1',
+      'data_dir'         => '/opt/consul',
+      'ui_dir'           => '/opt/consul/ui',
+      'client_addr'      => '0.0.0.0',
+      'log_level'        => 'INFO',
+      'node_name'        => $::hostname,
+      'bind_addr'        => $::ipaddress_eth1,
+      'bootstrap_expect' => 1,
+      'server'           => true,
+    }
+  } ->
   class { 'vault':
   }
 
@@ -41,8 +41,8 @@ node default {
 
 
 
-	::consul::service { 'mysql':
-		port           => 3306,
-	}
+  ::consul::service { 'mysql':
+    port => 3306,
+  }
 
 }
