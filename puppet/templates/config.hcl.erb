@@ -1,0 +1,9 @@
+backend "consul" {
+  address = "<<%= scope.lookupvar('vault::consul_addr') %>:<<%= scope.lookupvar('vault::consul_port') %>"
+  path = "vault"
+}
+
+listener "tcp" {
+  address = "127.0.0.1:8200"
+  tls_disable = 1
+}

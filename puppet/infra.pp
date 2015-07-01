@@ -13,6 +13,8 @@ class { 'apt_get_update':
   stage => preinstall
 }
 
+import "classes/*"
+
 node default {
 
 	class { 'consul':
@@ -28,6 +30,8 @@ node default {
 			'server'           => true,
 		}
 	}
+  class { 'vault':
+  }
 
   class { '::mysql::server':
     root_password           => 'root',

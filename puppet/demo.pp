@@ -18,6 +18,7 @@ class { 'apt_get_update':
   stage => preinstall
 }
 
+import "classes/*"
 
 node default {
   include apt
