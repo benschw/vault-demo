@@ -1,6 +1,17 @@
 Exec { path => "/usr/bin:/usr/sbin:/bin:/sbin" }
 
 
+stage { 'preinstall':
+  before => Stage['main']
+}
+ 
+class apt_get_update {
+  exec { 'apt-get -y update': }
+}
+ 
+class { 'apt_get_update':
+  stage => preinstall
+}
 
 node default {
 
@@ -26,9 +37,8 @@ node default {
 
 
 
-	consul::service { mysql
+	::consul::service { 'mysql':
 		port           => 3306,
-		check_interval => '5s',
 	}
 
 }

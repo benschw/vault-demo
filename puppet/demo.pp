@@ -53,7 +53,6 @@ node default {
 
 	::consul::service { hiera('svc_name'):
 		port           => 8080,
-		check_interval => '5s',
 	}
 
 }
