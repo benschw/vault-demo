@@ -1,5 +1,5 @@
 backend "consul" {
-  address = "<<%= scope.lookupvar('vault::consul_addr') %>:<<%= scope.lookupvar('vault::consul_port') %>"
+  address = "<%= scope.lookupvar('vault::consul_addr') %>:<%= scope.lookupvar('vault::consul_port') %>"
   path = "vault"
 }
 

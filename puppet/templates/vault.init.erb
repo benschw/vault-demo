@@ -17,7 +17,7 @@ DESC="Vault secret management"
 NAME=vault
 DAEMON=<%= scope.lookupvar('vault::bin_dir') %>/$NAME
 PIDFILE=/var/run/$NAME/$NAME.pid
-DAEMON_ARGS="agent -config <%= scope.lookupvar('vault::config_dir') %>/config.hcl
+DAEMON_ARGS="server -config <%= scope.lookupvar('vault::config_dir') %>/config.hcl"
 USER=root
 SCRIPTNAME=/etc/init.d/$NAME
 
