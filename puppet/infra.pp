@@ -31,15 +31,31 @@ node default {
     }
   } ->
   class { 'vault':
-  }
-
+  } ->
   class { '::mysql::server':
+    restart                 => true,
     root_password           => 'root',
     remove_default_accounts => true,
-    #  override_options        => $override_options
+    override_options        => {
+      'mysqld' => {
+        'bind_address' => '0.0.0.0',
+      },
+    },
+  } ->
+  class { 'dnsmasq':
+  }
+  mysql::db { 'Todo':
+    user     => 'myuser',
+    password => 'mypass',
+    host     => 'localhost',
+    grant    => ['SELECT', 'UPDATE'],
   }
 
-
+  dnsmasq::dnsserver { 'forward-zone-consul':
+    domain => 'consul',
+    ip     => '127.0.0.1',
+    port   => '8600',
+  }
 
   ::consul::service { 'mysql':
     port => 3306,
