@@ -68,7 +68,8 @@ Vagrant.configure("2") do |config|
     demo.vm.hostname = "demo.local"
     demo.vm.network "private_network", ip: "172.20.20.14"
 
-    demo.vm.provision :puppet do |puppet|
+    demo.vm.provision "shell", path: "set_user_id.sh", args: ENV['VAULT_USER_ID']
+	demo.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = "hiera/hiera.yaml"
       puppet.manifests_path    = "puppet"
       puppet.module_path       = "puppet/modules"

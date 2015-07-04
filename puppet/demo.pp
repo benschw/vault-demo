@@ -36,6 +36,8 @@ node default {
       'retry_join' => [hiera('join_addr')],
     }
   } ->
+  class { 'todo':
+  } ->
   class { 'dnsmasq':
   }
 
