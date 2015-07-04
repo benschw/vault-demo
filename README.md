@@ -1,10 +1,24 @@
 
 	./deps.sh
-	vagrant up infra
+	
+	vagrant up consul vault0 vault1 mysql
+	./01-init.sh
+	./02-unseal.sh
+	./03-configure.sh
+	./04-new-instance.sh
 
-	vagrant ssh infra
-	export VAULT_ADDR='http://172.20.20.10:8200'
+	curl -X POST http://172.20.20.14:8080/todo -d '{"status": "new", "content": "Hello World"}'
+	curl http://172.20.20.14:8080/todo/1
+
+## notes
+
 	export VAULT_ADDR='http://127.0.0.1:8200'
+	export VAULT_APP_ID='1a5dea24-7a0f-4416-b61f-a13439ba2317'
+	export VAULT_USER_ID='657a0247-0f7e-4fc7-8996-1445af21597e'
+
+
+## cli notes
+
 	vault init
 	Key 1: ed5188e6a92c26f394b421dc2bc5790c82eb257db613fb5dc94cc259ac618f5401
 	Key 2: 10d8fd02c00c6d8b1a64b08c4256edaec10f4d936e05277ec9114b1307a20f3f02
@@ -31,10 +45,8 @@
 	curl --silent --data '{"app_id": "1a5dea24-7a0f-4416-b61f-a13439ba2317", "user_id": "657a0247-0f7e-4fc7-8996-1445af21597e"}' "$VAULT_ADDR/v1/auth/app-id/login"
 
 	
-	export VAULT_ADDR='http://127.0.0.1:8200'
-	export VAULT_APP_ID='1a5dea24-7a0f-4416-b61f-a13439ba2317'
-	export VAULT_USER_ID='657a0247-0f7e-4fc7-8996-1445af21597e'
 
+## REST notes
 
 	curl -X PUT http://172.20.20.11:8200/v1/sys/init -d '{"secret_shares": 1, "secret_threshold": 1}'
 	{"keys":["39c7a7c3e8340f42d4f58bf57598037c1293b2b3525aa41fa64624fdc7d980a6"],"root_token":"dc3f7bc7-6dee-a636-06b9-3a9c88c3dfa7"}
@@ -64,10 +76,5 @@
 	export VAULT_USER_ID='657a0247'
 
 
-
-
-	curl -X POST http://172.20.20.14:8080/todo -d '{"status": "new", "content": "Hello World"}'
-	curl http://172.20.20.14:8080/todo/1
-
-
+	curl -X POST http://172.20.20.11:8200/v1/auth/app-id/login -d '{"app_id": "1a5dea24", "user_id": "8ce57f7b-33bd-4126-94a0-d6458914a356"}'
 
