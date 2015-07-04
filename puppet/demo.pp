@@ -28,14 +28,13 @@ node default {
     config_hash => {
       'datacenter' => 'dc1',
       'data_dir'   => '/opt/consul',
+      'client_addr'=> '0.0.0.0',
       'log_level'  => 'INFO',
       'node_name'  => $::hostname,
       'bind_addr'  => $::ipaddress_eth1,
       'server'     => false,
       'retry_join' => [hiera('join_addr')],
     }
-  } ->
-  class { 'vault':
   } ->
   class { 'dnsmasq':
   }

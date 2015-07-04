@@ -2,30 +2,71 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  
+
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
   config.vm.box = "trusty64"
 
-  # consul0 ====================================================================
-  config.vm.define "infra" do |infra|
+  # consul =====================================================================
+  config.vm.define "consul" do |consul|
 
-    infra.vm.hostname = "infra.local"
-    infra.vm.network "private_network", ip: "172.20.20.10"
+    consul.vm.hostname = "consul.local"
+    consul.vm.network "private_network", ip: "172.20.20.10"
 
-    infra.vm.provision :puppet do |puppet|
+    consul.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = "hiera/hiera.yaml"
       puppet.manifests_path    = "puppet"
       puppet.module_path       = "puppet/modules"
-      puppet.manifest_file     = "infra.pp"
+      puppet.manifest_file     = "consul.pp"
     end
   end
-  # end ========================================================================
+
+  # vault0 =====================================================================
+  config.vm.define "vault0" do |vault0|
+
+    vault0.vm.hostname = "vault0.local"
+    vault0.vm.network "private_network", ip: "172.20.20.11"
+
+    vault0.vm.provision :puppet do |puppet|
+      puppet.hiera_config_path = "hiera/hiera.yaml"
+      puppet.manifests_path    = "puppet"
+      puppet.module_path       = "puppet/modules"
+      puppet.manifest_file     = "vault.pp"
+    end
+  end
+
+  # vault1 =====================================================================
+  config.vm.define "vault1" do |vault1|
+
+    vault1.vm.hostname = "vault1.local"
+    vault1.vm.network "private_network", ip: "172.20.20.12"
+
+    vault1.vm.provision :puppet do |puppet|
+      puppet.hiera_config_path = "hiera/hiera.yaml"
+      puppet.manifests_path    = "puppet"
+      puppet.module_path       = "puppet/modules"
+      puppet.manifest_file     = "vault.pp"
+    end
+  end
+
+  # mysql ======================================================================
+  config.vm.define "mysql" do |mysql|
+
+    mysql.vm.hostname = "mysql.local"
+    mysql.vm.network "private_network", ip: "172.20.20.13"
+
+    mysql.vm.provision :puppet do |puppet|
+      puppet.hiera_config_path = "hiera/hiera.yaml"
+      puppet.manifests_path    = "puppet"
+      puppet.module_path       = "puppet/modules"
+      puppet.manifest_file     = "mysql.pp"
+    end
+  end
 
   # demo =======================================================================
   config.vm.define "demo" do |demo|
 
     demo.vm.hostname = "demo.local"
-    demo.vm.network "private_network", ip: "172.20.20.20"
+    demo.vm.network "private_network", ip: "172.20.20.14"
 
     demo.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = "hiera/hiera.yaml"

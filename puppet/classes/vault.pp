@@ -4,6 +4,8 @@ class vault (
     $config_dir = '/etc/vault',
     $consul_addr = $::ipaddress_eth1,
     $consul_port = 8500,
+    $vault_addr  = $::ipaddress_eth1,
+    $vault_port  = 8200
 ) {
   ensure_packages(['unzip'])
   staging::file { 'vault.zip':
@@ -34,7 +36,7 @@ class vault (
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    content => template('/vagrant/puppet/templates/config.hcl.erb'),
+    content => template('/vagrant/puppet/templates/vault-config.hcl.erb'),
   } ->
   service { 'vault':
     ensure => 'running',
