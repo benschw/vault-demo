@@ -28,8 +28,8 @@ SCRIPTNAME=/etc/init.d/$NAME
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
 # Read vault creds
-[ -r  <%= scope.lookupvar('todo::config_dir') %>/app_id] && . <%= scope.lookupvar('todo::config_dir') %>/app_id
-[ -r  <%= scope.lookupvar('todo::config_dir') %>/user_id] && . <%= scope.lookupvar('todo::config_dir') %>/user_id
+[ -r  <%= scope.lookupvar('todo::config_dir') %>/app_id ] && . <%= scope.lookupvar('todo::config_dir') %>/app_id
+[ -r  <%= scope.lookupvar('todo::config_dir') %>/user_id ] && . <%= scope.lookupvar('todo::config_dir') %>/user_id
 
 # Load the VERBOSE setting and other rcS variables
 [ -f /etc/default/rcS ] && . /etc/default/rcS
