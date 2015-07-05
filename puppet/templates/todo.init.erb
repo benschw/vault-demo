@@ -17,7 +17,7 @@ DESC="Vault secret management"
 NAME=todo
 DAEMON=<%= scope.lookupvar('todo::bin_dir') %>/$NAME
 PIDFILE=/var/run/$NAME/$NAME.pid
-DAEMON_ARGS=""
+DAEMON_ARGS="-syslog"
 USER=root
 SCRIPTNAME=/etc/init.d/$NAME
 
