@@ -40,10 +40,10 @@ node default {
   class { 'todo':
   }
 
-  ::consul::service { 'demo':
+  ::consul::service { 'todo':
     port   => 8080,
     checks => [{
-      http     => 'http://localhost:8080/health'
+      http     => 'http://localhost:8080/health',
       interval => '5s'
     }],
   }
