@@ -10,8 +10,8 @@
 
 ### not just a simple `vagrant up`:
 For vault to be secure, the bootstrapping process for a new vault server must be done out of band.
-Key shards must be provided to unseal the vault, and these should be entrusted to trusted people 
-(by entrusting them to an automated process, you haven't secured anything - just added 
+Key shards must be provided to unseal the vault, and these should be entrusted to trusted people
+(by entrusting them to an automated process, you haven't secured anything - just added
 [another turtle](https://en.wikipedia.org/wiki/Turtles_all_the_way_down) to the stack).
 
 That said, for this POC we are automating it (but keeping the work separate from the normal
@@ -26,7 +26,7 @@ Install puppet deps:
 
 
 Bring up the infrastructure:
-	
+
 	vagrant up consul vault0 vault1 mysql
 
 Initialize, Unseal, and configure Vault:
@@ -79,5 +79,5 @@ Verify everything came up correctly:
 
 	curl -X POST "$VAULT_ADDR/v1/auth/app-id/login" -d '{"app_id": "1a5dea24-7a0f-4416-b61f-a13439ba2317", "user_id": "657a0247-0f7e-4fc7-8996-1445af21597e"}'
 
-	
+
 
