@@ -23,17 +23,16 @@ import 'classes/*'
 node default {
   include apt
 
-
   class { 'consul':
     config_hash => {
-      'datacenter' => 'dc1',
-      'data_dir'   => '/opt/consul',
-      'client_addr'=> '0.0.0.0',
-      'log_level'  => 'INFO',
-      'node_name'  => $::hostname,
-      'bind_addr'  => $::ipaddress_eth1,
-      'server'     => false,
-      'retry_join' => [hiera('join_addr')],
+      'datacenter'  => 'dc1',
+      'data_dir'    => '/opt/consul',
+      'client_addr' => '0.0.0.0',
+      'log_level'   => 'INFO',
+      'node_name'   => $::hostname,
+      'bind_addr'   => $::ipaddress_eth1,
+      'server'      => false,
+      'retry_join'  => [hiera('join_addr')],
     }
   } ->
   class { 'dnsmasq':
@@ -50,5 +49,4 @@ node default {
     ip     => '127.0.0.1',
     port   => '8600',
   }
-
 }

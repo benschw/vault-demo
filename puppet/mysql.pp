@@ -19,21 +19,21 @@ node default {
 
   class { 'consul':
     config_hash => {
-      'datacenter'       => 'dc1',
-      'data_dir'         => '/opt/consul',
-      'client_addr'      => '0.0.0.0',
-      'log_level'        => 'INFO',
-      'node_name'        => $::hostname,
-      'bind_addr'        => $::ipaddress_eth1,
-      'server'           => false,
-      'retry_join' => [hiera('join_addr')],
+      'datacenter'  => 'dc1',
+      'data_dir'    => '/opt/consul',
+      'client_addr' => '0.0.0.0',
+      'log_level'   => 'INFO',
+      'node_name'   => $::hostname,
+      'bind_addr'   => $::ipaddress_eth1,
+      'server'      => false,
+      'retry_join'  => [hiera('join_addr')],
     }
   }
 
   ::consul::service { 'mysql':
-    port => 3306,
-    checks  => [{
-      script   => 'pgrep mysql > /dev/null',
+    port   => 3306,
+    checks => [{
+      script   => 'pgrep mysql > /dev/null || exit 2',
       interval => '5s'
     }],
   }
@@ -48,9 +48,9 @@ node default {
       },
     },
   }
-  mysql_user { "vaultadmin@%":
+  mysql_user { 'vaultadmin@%':
     ensure        => 'present',
-    password_hash => mysql_password("vault");
+    password_hash => mysql_password('vault');
   }
   mysql_grant { 'vaultadmin@%/*.*':
     ensure     => 'present',

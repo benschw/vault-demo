@@ -1,6 +1,5 @@
 Exec { path => '/usr/bin:/usr/sbin:/bin:/sbin' }
 
-
 node default {
 
   class { 'consul':
@@ -16,5 +15,4 @@ node default {
       'server'           => true,
     }
   }
-
 }
