@@ -41,7 +41,11 @@ node default {
   }
 
   ::consul::service { 'demo':
-    port => 8080,
+    port   => 8080,
+    checks => [{
+      http     => 'http://localhost:8080/health'
+      interval => '5s'
+    }],
   }
 
   dnsmasq::dnsserver { 'forward-zone-consul':
