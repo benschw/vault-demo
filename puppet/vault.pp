@@ -4,6 +4,7 @@ import 'classes/*'
 
 node default {
 
+  ensure_packages(['jq'])
   class { 'consul':
     config_hash => {
       'datacenter'  => 'dc1',
@@ -21,6 +22,10 @@ node default {
 
   ::consul::service { 'vault':
     port => 8200,
+    checks  => [{
+      script   => "curl -s ${::ipaddress_eth1}:8200/v1/sys/seal-status | jq .sealed | grep false > /dev/null",
+      interval => '5s'
+    }],
   }
 
 }

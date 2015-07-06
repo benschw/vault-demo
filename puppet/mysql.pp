@@ -32,6 +32,10 @@ node default {
 
   ::consul::service { 'mysql':
     port => 3306,
+    checks  => [{
+      script   => 'pgrep mysql > /dev/null',
+      interval => '5s'
+    }],
   }
 
   class { '::mysql::server':
