@@ -15,7 +15,7 @@ Key shards must be provided to unseal the vault, and these should be entrusted t
 [another turtle](https://en.wikipedia.org/wiki/Turtles_all_the_way_down) to the stack).
 
 That said, for this POC we are automating it (but keeping the work separate from the normal
-automation to illustrate the separation). So thats what all the bash scripts coming up are all about.
+automation to illustrate the separation). So that's what all the bash scripts coming up are all about.
 
 
 ### Setup
