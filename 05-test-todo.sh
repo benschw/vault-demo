@@ -25,4 +25,11 @@ for i in `seq 0 1`; do
 	fi
 done
 
+
+FOUND_STATUS=$(curl -si -X DELETE http://$ADDR:$PORT/todo/$TODO_ID | grep HTTP/1.1 | awk '{print $2}')
+
+if [ $FOUND_STATUS -ne 204 ]; then
+	echo "Error: there was a problem deleting our test todo with 'curl -si -X DELETE http://$ADDR:$PORT/todo/$TODO_ID'"
+	exit 1
+fi
 echo OK: tests passed
