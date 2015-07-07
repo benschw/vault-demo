@@ -1,12 +1,13 @@
 ## POC Vault cluster
 
-### 5 vms
+### 6 vms
 
 - `consul` consul server to coordinate discovery and provide a backend for vault
 - `vault0` vault server
 - `vault1` a second vault server to demonstrate how HA works
 - `mysql` a mysql-server for the todo service to utilize. credentials are managed by vault
-- `todo` the demo service to see everything come together
+- `todo0` the demo service to see everything come together
+- `todo1` a second demo service for HA
 
 ### not just a simple `vagrant up`:
 For vault to be secure, the bootstrapping process for a new vault server must be done out of band.
@@ -37,7 +38,7 @@ Initialize, Unseal, and configure Vault:
 
 Stand up the `todo` instance:
 
-	./04-new-instance.sh
+	./04-provision-todo.sh
 
 
 Verify everything came up correctly:

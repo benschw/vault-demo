@@ -62,20 +62,36 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  # demo =======================================================================
-  config.vm.define "todo" do |todo|
+  # todo0 ======================================================================
+  config.vm.define "todo0" do |todo0|
 
-    todo.vm.hostname = "todo.local"
-    todo.vm.network "private_network", ip: "172.20.20.14"
+    todo0.vm.hostname = "todo0.local"
+    todo0.vm.network "private_network", ip: "172.20.20.14"
 
-    todo.vm.provision "shell", path: "set_user_id.sh", args: ENV['VAULT_USER_ID']
-	todo.vm.provision :puppet do |puppet|
+    todo0.vm.provision "shell", path: "set_user_id.sh", args: ENV['VAULT_USER_ID']
+	todo0.vm.provision :puppet do |puppet|
       puppet.hiera_config_path = "hiera/hiera.yaml"
       puppet.manifests_path    = "puppet"
       puppet.module_path       = "puppet/modules"
       puppet.manifest_file     = "todo.pp"
     end
   end
+
+  # todo1 ======================================================================
+  config.vm.define "todo1" do |todo1|
+
+    todo1.vm.hostname = "todo1.local"
+    todo1.vm.network "private_network", ip: "172.20.20.15"
+
+    todo1.vm.provision "shell", path: "set_user_id.sh", args: ENV['VAULT_USER_ID']
+	todo1.vm.provision :puppet do |puppet|
+      puppet.hiera_config_path = "hiera/hiera.yaml"
+      puppet.manifests_path    = "puppet"
+      puppet.module_path       = "puppet/modules"
+      puppet.manifest_file     = "todo.pp"
+    end
+  end
+
   # end ========================================================================
 
   config.vm.provider :virtualbox do |vb|
