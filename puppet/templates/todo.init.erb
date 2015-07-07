@@ -13,7 +13,7 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/usr/sbin:/usr/bin:/sbin:/bin:<%= scope.lookupvar('todo::bin_dir') %>
-DESC="Vault secret management"
+DESC="Demo Service"
 NAME=todo
 DAEMON=<%= scope.lookupvar('todo::bin_dir') %>/$NAME
 PIDFILE=/var/run/$NAME/$NAME.pid
