@@ -18,6 +18,7 @@ node default {
     }
   } ->
   class { 'vault':
+    download_url => 'https://dl.dropboxusercontent.com/u/1266213/vault-2015.07.08-master.zip',
   }
 
   ::consul::service { 'vault':

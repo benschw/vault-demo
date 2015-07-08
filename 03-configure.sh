@@ -12,7 +12,7 @@ curl -X POST http://172.20.20.11:8200/v1/sys/mounts/mysql -H "X-Vault-Token: $RO
 curl -X POST http://172.20.20.11:8200/v1/mysql/config/connection -H "X-Vault-Token: $ROOT_TOKEN" \
 	-d '{"value": "vaultadmin:vault@tcp(172.20.20.13:3306)/"}'
 curl -X POST http://172.20.20.11:8200/v1/mysql/config/lease -H "X-Vault-Token: $ROOT_TOKEN" \
-	-d '{"lease": "30s", "lease_max": "24h"}'
+	-d '{"lease": "1m", "lease_max": "24h"}'
 
 echo "create 'todo' role"
 curl -X POST http://172.20.20.11:8200/v1/mysql/roles/todo -H "X-Vault-Token: $ROOT_TOKEN" \
