@@ -4,7 +4,7 @@ import 'classes/*'
 
 node default {
 
-  ensure_packages(['jq'])
+  ensure_packages(['jq', 'unzip'])
   class { 'consul':
     config_hash => {
       'datacenter'  => 'dc1',

@@ -17,6 +17,8 @@ import 'classes/*'
 
 node default {
 
+  package { 'unzip': }
+  ->
   class { 'consul':
     config_hash => {
       'datacenter'  => 'dc1',

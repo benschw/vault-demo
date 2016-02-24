@@ -1,7 +1,8 @@
 Exec { path => '/usr/bin:/usr/sbin:/bin:/sbin' }
 
 node default {
-
+  package { 'unzip': }
+  ->
   class { 'consul':
     config_hash => {
       'datacenter'       => 'dc1',
