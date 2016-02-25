@@ -23,6 +23,8 @@ import 'classes/*'
 node default {
   include apt
 
+  package { 'unzip': }
+  ->
   class { 'consul':
     config_hash => {
       'datacenter'  => 'dc1',
